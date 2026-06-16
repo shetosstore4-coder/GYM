@@ -10,6 +10,14 @@
             --card-bg: #1f2833;
             --text-color: #c5a059;
             --white: #ffffff;
+            
+            /* Glowing Tabs Variables */
+            --body-bg-color: hsl(221deg 16% 6%);
+            --bg-position: 0;
+            --debug: 0;
+            --trs-easing: cubic-bezier(.41, -0.09, .55, 1.09);
+            --trs-timing: 300ms;
+            --trs-delay: 80ms;
         }
 
         * {
@@ -50,12 +58,12 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem 2rem 2rem;
         }
 
         .main-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             color: #46a29f;
             font-size: 3rem;
         }
@@ -85,7 +93,7 @@
 
         /* Inner Sub-Pages Layout */
         .sub-page {
-            padding: 2rem;
+            padding: 0 2rem 2rem 2rem;
             min-height: 100vh;
             position: relative;
         }
@@ -93,7 +101,7 @@
         .back-btn {
             position: absolute;
             top: 20px;
-            left: 20px; /* Positions button strictly at the top left */
+            left: 20px;
             background-color: #ff4757;
             color: white;
             border: none;
@@ -122,13 +130,13 @@
 
         .exercise-box {
             background: transparent;
-            border: 3px solid red; /* Base fallback */
+            border: 3px solid red;
             border-radius: 12px;
             overflow: hidden;
             height: 250px;
             cursor: pointer;
             position: relative;
-            animation: rgb-motion 6s linear infinite; /* RGB border motion */
+            animation: rgb-motion 6s linear infinite;
             transition: transform 0.3s;
         }
 
@@ -199,7 +207,9 @@
             border-radius: 15px;
             border: 2px solid #45f3ff;
             text-align: center;
-            min-width: 300px;
+            min-width: 320px;
+            max-width: 500px;
+            width: 90%;
             position: relative;
             transform: scale(0.7);
             transition: transform 0.3s ease;
@@ -224,19 +234,304 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            margin-top: 1rem;
         }
+
+        /* Form styling inside body metric modal */
+        .metric-form-group {
+            margin-bottom: 12px;
+            text-align: right;
+        }
+
+        .metric-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #46a29f;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .metric-form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #45f3ff;
+            background-color: #0b0c10;
+            color: #ffffff;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .save-metrics-btn {
+            background-color: #46a29f;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+
+        .save-metrics-btn:hover {
+            background-color: #45f3ff;
+            color: #0b0c10;
+        }
+
+        /* English Content Layout Styles */
+        .english-content {
+            direction: ltr;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid #1f2833;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .english-content h2 {
+            color: #45f3ff;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .english-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+
+        .english-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .english-content ul li {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+            color: #c5a059;
+        }
+
+        /* ------------------------------------------------------------------ */
+        /* GLOWING TABS NAVIGATION STYLES                                     */
+        /* ------------------------------------------------------------------ */
+        @layer properties {
+            @property --after-bg-position { syntax: "<number>"; inherits: true; initial-value: 0; }
+            @property --after-radial-bg-position { syntax: "<number>"; inherits: true; initial-value: 0; }
+            @property --after-bg-width { syntax: "<number>"; inherits: true; initial-value: 100; }
+            @property --after-bg-opacity { syntax: "<number>"; inherits: true; initial-value: 20; }
+            @property --after-shadow-offset { syntax: "<number>"; inherits: true; initial-value: 15; }
+            @property --after-scale { syntax: "<number>"; inherits: true; initial-value: 0.85; }
+            @property --li-before-opacity { syntax: "<number>"; inherits: true; initial-value: 0; }
+        }
+
+        .tabs-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            margin-top: 2rem;
+        }
+
+        .nav {
+            direction: ltr; /* Keeps navigation tracking aligned with mouse logic */
+            transition: --after-bg-position var(--trs-timing) var(--trs-easing) 0.2s, 
+                        --after-radial-bg-position var(--trs-timing) var(--trs-easing) 0.2s, 
+                        --after-bg-width var(--trs-timing) var(--trs-easing) 0.2s, 
+                        --after-bg-opacity var(--trs-timing) var(--trs-easing) 0.2s, 
+                        --li-before-opacity var(--trs-timing) var(--trs-easing) 0.2s;
+            background: var(--body-bg-color);
+            border-radius: 100px;
+            position: relative;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .nav:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: calc(calc(var(--after-bg-width) * 1px) - 8px);
+            height: 100%;
+            background: rgb(255 255 255 / calc(var(--after-shadow-offset) * 1%));
+            border-radius: 100px;
+            filter: blur(20px);
+            left: 0;
+            top: 0;
+            transform: translateX(calc(var(--after-bg-position) * 1px)) scale(1.1);
+        }
+
+        .nav ul {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            height: 80px;
+            border-radius: 100px;
+            background-position: center center;
+            background-image: radial-gradient(ellipse 150px 100px at calc(var(--after-radial-bg-position) * 1px) bottom, white 0%, rgba(255, 255, 255, 0.2) 100%);
+        }
+
+        .nav ul:active {
+            --after-scale: 0.75;
+        }
+
+        .nav ul:before {
+            content: "";
+            display: block;
+            position: absolute;
+            width: calc(100% - 2px);
+            height: calc(100% - 2px);
+            background: var(--body-bg-color);
+            top: 1px;
+            left: 1px;
+            border-radius: 100px;
+        }
+
+        .nav ul:after {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: 1;
+            width: calc(calc(var(--after-bg-width) * 1px) - 12px);
+            height: calc(100% - 12px);
+            background: linear-gradient(to bottom, rgb(255 255 255 / calc(calc(var(--after-bg-opacity, 0) / 10) * 1%)), rgba(255, 255, 255, 0.1));
+            box-shadow: inset 0 -6px calc(var(--after-shadow-offset, 0) * 1px) rgb(255 255 255 / calc(var(--after-bg-opacity) * 1%));
+            left: 6px;
+            top: 6px;
+            transform: translate(calc(var(--after-bg-position) * 1px), 0);
+            border-radius: 100px 12px 12px 100px;
+            transition: --after-bg-opacity var(--trs-timing) var(--trs-easing) var(--trs-delay), 
+                        --after-shadow-offset var(--trs-timing) var(--trs-easing) var(--trs-delay), 
+                        border-radius var(--trs-timing) var(--trs-easing) var(--trs-delay);
+            pointer-events: none;
+        }
+
+        .nav ul li {
+            padding: 1em;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 800px;
+        }
+
+        .nav ul li:not(.active):hover {
+            --li-before-opacity: 0.3;
+        }
+
+        .nav ul li:before {
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            user-select: none;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.35));
+            opacity: var(--li-before-opacity);
+            transform: scale(var(--after-scale)) rotateY(calc(var(--tilt-bg-y) * 3 * -1deg)) rotateX(calc(var(--tilt-bg-x) * 3 * 1deg)) translateZ(15px);
+            transition: --li-before-opacity var(--trs-timing) var(--trs-easing), 
+                        --after-scale calc(var(--trs-timing) / 2) var(--trs-easing) calc(var(--trs-delay) / 2);
+        }
+
+        .nav ul li:first-of-type:before { border-radius: 100px 12px 12px 100px; }
+        .nav ul li:last-of-type:before { border-radius: 12px 100px 100px 12px; }
+
+        .nav ul li a {
+            display: flex;
+            color: #ffffff;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            position: relative;
+            z-index: 10;
+            font-weight: bold;
+        }
+
+        .nav ul:has(li.active:first-of-type a):after { border-radius: 100px 12px 12px 100px; }
+        .nav ul:has(li.active:last-of-type a):after { border-radius: 12px 100px 100px 12px; }
+        .nav ul:has(li.active:nth-child(n+2):nth-child(-n+3) a):after { border-radius: 100px; }
     </style>
 </head>
 <body>
 
+    <div class="tabs-header">
+        <nav class="nav">
+            <ul>
+                <li><a href="#home" id="home">Home</a></li>
+                <li><a href="#about" id="about">About</a></li>
+                <li><a href="#body" id="body">body</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <div id="main-dashboard" class="container">
-        <h1 class="main-title">جدول التمارين الإسبوعي</h1>
+        <h1 class="main-title">Gym Tracker</h1>
+        
         <div class="grid-dashboard">
             <div class="main-card" onclick="navigateTo('page-1')">الأحد</div>
             <div class="main-card" onclick="navigateTo('page-2')">الثلاثاء</div>
             <div class="main-card" onclick="navigateTo('page-3')">الخميس</div>
             <div class="main-card" onclick="navigateTo('page-4')">السبت</div>
+        </div>
+    </div>
 
+    <div id="page-about-program" class="sub-page hidden">
+        <h1 class="rgb-text" style="letter-spacing: 2px;">About Gym Tracker</h1>
+        <div class="english-content">
+            <h2>Your Ultimate Fitness Companion</h2>
+            <p>
+                Welcome to Gym Tracker, a unified and minimalist web platform designed to streamline your workout logistics and map your physiological adaptations over macrocycles. This program serves two distinct operational methodologies:
+            </p>
+            
+            <h2>1. Structural Workout Planning</h2>
+            <p>
+                The primary dashboard delivers instantaneous access to structured localized splits for specific microcycles (Sunday, Tuesday, Thursday, and Saturday). Each daily plan breaks down into highly localized training movements matched with animated interactive guidelines to keep your posture, cadence, and mechanics precise.
+            </p>
+
+            <h2>2. Comprehensive 12-Week Body Analytics</h2>
+            <p>
+                True biological composition change requires micro-adjustments. The dedicated <strong>Body</strong> navigation hub partitions your year into a clean 12-week analytical grid. By recording your biometrics weekly, you build a data profile monitoring:
+            </p>
+            <ul>
+                <li>Total skeletal height and current weight vectors.</li>
+                <li>Adipose tissue calculation (Body Fat Percentage).</li>
+                <li>Active metabolic mass indexation (Muscle & Bone Mass variants).</li>
+                <li>Basal Metabolic Rate (BMR) tracking to optimize caloric windows.</li>
+            </ul>
+            <p>
+                All biometric information captured by this system is structured and safely compiled within your browser local runtime context, ensuring permanent data tracking.
+            </p>
+        </div>
+    </div>
+
+    <div id="page-body-tracking" class="sub-page hidden">
+        <h1 class="rgb-text">[متابعة قياسات الجسم الإسبوعية]</h1>
+        <div class="grid-dashboard" style="margin-top: 2rem;">
+            <div class="main-card" onclick="openBodyMetricModal(1)">الأسبوع 1</div>
+            <div class="main-card" onclick="openBodyMetricModal(2)">الأسبوع 2</div>
+            <div class="main-card" onclick="openBodyMetricModal(3)">الأسبوع 3</div>
+            <div class="main-card" onclick="openBodyMetricModal(4)">الأسبوع 4</div>
+            <div class="main-card" onclick="openBodyMetricModal(5)">الأسبوع 5</div>
+            <div class="main-card" onclick="openBodyMetricModal(6)">الأسبوع 6</div>
+            <div class="main-card" onclick="openBodyMetricModal(7)">الأسبوع 7</div>
+            <div class="main-card" onclick="openBodyMetricModal(8)">الأسبوع 8</div>
+            <div class="main-card" onclick="openBodyMetricModal(9)">الأسبوع 9</div>
+            <div class="main-card" onclick="openBodyMetricModal(10)">الأسبوع 10</div>
+            <div class="main-card" onclick="openBodyMetricModal(11)">الأسبوع 11</div>
+            <div class="main-card" onclick="openBodyMetricModal(12)">الأسبوع 12</div>
         </div>
     </div>
 
@@ -259,16 +554,15 @@
         <button class="back-btn" onclick="navigateBack()">رجوع</button>
         <h1 class="rgb-text">[ظهر و باي]</h1>
         <div class="boxes-grid">
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/MAG_LAT_PULL_DOWN.gif" alt="Back"><div class="box-label">تمرين 1</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/wp-content/uploads/SEATED_CABLE_ROW.gif" alt="Bicep"><div class="box-label">تمرين 2</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/FACE_PULL-1.gif" alt="Back"><div class="box-label">تمرين 3</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/05/One-Arm-Dumbbel-Row.gif" alt="Bicep"><div class="box-label">تمرين 4</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_HAM_CURL.gif" alt="Back"><div class="box-label">تمرين 5</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/INC_DB_CURL.gif" alt="Bicep"><div class="box-label">تمرين 6</div></div>
-             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_PREA_CURL-1.gif" alt="Back"><div class="box-label">تمرين 7</div></div>
-                          <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/02/CABLE_CURL.gif" alt="Back"><div class="box-label">تمرين 8</div></div>
-                                       <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/INC_DB_CURL.gif" alt="Back"><div class="box-label">تمرين (7)</div></div>
-
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/BHD_NECK_PULL_DOWN.gif" alt="Back"><div class="box-label">تمرين 1</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/02/HPET.gif" alt="Back"><div class="box-label">تمرين 2</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/wp-content/uploads/SEATED_CABLE_ROW.gif" alt="Bicep"><div class="box-label">تمرين 3</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/FACE_PULL-1.gif" alt="Back"><div class="box-label">تمرين 4</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/05/One-Arm-Dumbbel-Row.gif" alt="Bicep"><div class="box-label">تمرين 5</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_HAM_CURL.gif" alt="Back"><div class="box-label">تمرين 6</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/BB_PREA_CURL.gif" alt="Bicep"><div class="box-label">تمرين 7</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_HAM_CURL-1.gif" alt="Back"><div class="box-label">تمرين 8</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/02/CABLE_CURL.gif" alt="Back"><div class="box-label">تمرين 9</div></div>
         </div>
     </div>
 
@@ -276,64 +570,31 @@
         <button class="back-btn" onclick="navigateBack()">رجوع</button>
         <h1 class="rgb-text">[رجل ]</h1>
         <div class="boxes-grid">
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="data:image/jpeg;base64,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" alt="Chest"><div class="box-label">تمرين 1</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTU-1nDyu-kI1I9fN10X8E7qmxS7tWG5Ox8A&s" alt="Chest"><div class="box-label">تمرين 2</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="data:image/jpeg;base64,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" alt="Tricep"><div class="box-label">تمرين 3</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&auto=format&fit=crop" alt="Chest"><div class="box-label">تمرين 4</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&auto=format&fit=crop" alt="Tricep"><div class="box-label">تمرين 5</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=500&auto=format&fit=crop" alt="Chest"><div class="box-label">تمرين 6</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500&auto=format&fit=crop" alt="Tricep"><div class="box-label">تمرين 7</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LEG_PRESS-1.gif" alt="Chest"><div class="box-label">تمرين 1</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SEAT_CALF_RAISE.gif" alt="Chest"><div class="box-label">تمرين 2</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/BW_CALF_RAISE.gif" alt="Chest"><div class="box-label">تمرين 3</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LEG_CURL.gif" alt="Chest"><div class="box-label">تمرين 4</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LGE_EXT-1.gif" alt="Tricep"><div class="box-label">تمرين 5</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_HIP_ABD.gif" alt="Chest"><div class="box-label">تمرين 6</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_WRIST_CURL.gif" alt="Tricep"><div class="box-label">تمرين 7</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/REV_DB_WRIST_CURL.gif" alt="Chest"><div class="box-label">تمرين 8</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SIT_UP.gif" alt="Chest"><div class="box-label">تمرين 9</div></div>
         </div>
     </div>
    
-
     <div id="page-4" class="sub-page hidden">
         <button class="back-btn" onclick="navigateBack()">رجوع</button>
         <h1 class="rgb-text">[كتف]</h1>
         <div class="boxes-grid">
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 1</div></div>
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 2</div></div>
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 3</div></div>
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 4</div></div>
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 5</div></div>
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 6</div></div>
-            <div class="exercise-box"><img src="https://images.unsplash.com/photo-1605296867304-46d5465a25f1?w=500&auto=format&fit=crop" alt="Shoulders"><div class="box-label">تمرين 7</div></div>
-        </div>
-    </div>
-
-    <div id="page-5" class="sub-page hidden">
-        <button class="back-btn" onclick="navigateBack()">رجوع</button>
-        <h1 class="rgb-text">[رجل]</h1>
-        <div class="boxes-grid">
-            <div class="exercise-box" onclick="openModal('.')"><img src="https://images.unsplash.com/photo-1434608519344-49d77a699e1d?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 1</div></div>
-            <div class="exercise-box" onclick="openModal('..')"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 2</div></div>
-            <div class="exercise-box" onclick="openModal('...')"><img src="https://images.unsplash.com/photo-1519315901367-f34ff9154487?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 3</div></div>
-            <div class="exercise-box" onclick="openModal('....')"><img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 4</div></div>
-            <div class="exercise-box" onclick="openModal('.....')"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 5</div></div>
-            <div class="exercise-box" onclick="openModal('......')"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 6</div></div>
-            <div class="exercise-box" onclick="openModal('........')"><img src="https://images.unsplash.com/photo-1603287634276-ae48de31a3d4?w=500&auto=format&fit=crop" alt="Legs"><div class="box-label">تمرين 7</div></div>
-        </div>
-    </div>
-
-    <div id="page-6" class="sub-page hidden">
-        <button class="back-btn" onclick="navigateBack()">رجوع</button>
-        <h1 class="rgb-text">[بريك]</h1>
-        <div class="rest-container">
-            <div class="exercise-box rest-box">
-                <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&auto=format&fit=crop" alt="Rest Day">
-                <div class="box-label">وقت الراحة والاستشفاء</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="page-7" class="sub-page hidden">
-        <button class="back-btn" onclick="navigateBack()">رجوع</button>
-        <h1 class="rgb-text">[بريك]</h1>
-        <div class="rest-container">
-            <div class="exercise-box rest-box">
-                <img src="https://images.unsplash.com/photo-1594882645126-14020914d58d?w=600&auto=format&fit=crop" alt="Rest Day">
-                <div class="box-label">وقت الراحة والاستشفاء</div>
-            </div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_LAT_RAISE-1.gif" alt="Shoulders"><div class="box-label">تمرين 1</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_BO_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 2</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_SHD_PRESS-1.gif" alt="Shoulders"><div class="box-label">تمرين 3</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_REAR_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 4</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/OA_CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 5</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SEAT_DB_TRI_EXT.gif" alt="Shoulders"><div class="box-label">تمرين 6</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SHD_PRESS_MAC-1.gif" alt="Shoulders"><div class="box-label">تمرين 7</div></div>
+            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 8</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SIT_UP.gif" alt="Chest"><div class="box-label">تمرين 9</div></div>
         </div>
     </div>
 
@@ -344,15 +605,59 @@
         </div>
     </div>
 
+    <div id="body-metric-modal" class="modal-overlay" onclick="closeBodyMetricModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div id="body-modal-title" class="modal-text" style="font-size: 1.8rem;">تحديث قياسات الأسبوع</div>
+            
+            <form id="body-metric-form" onsubmit="saveBodyMetrics(event)">
+                <input type="hidden" id="metric-week-id">
+                
+                <div class="metric-form-group">
+                    <label>الطول (سم):</label>
+                    <input type="number" id="metric-height" step="0.1" required>
+                </div>
+                <div class="metric-form-group">
+                    <label>الوزن (كجم):</label>
+                    <input type="number" id="metric-weight" step="0.1" required>
+                </div>
+                <div class="metric-form-group">
+                    <label>نسبة الدهون (%):</label>
+                    <input type="number" id="metric-fat" step="0.1" required>
+                </div>
+                <div class="metric-form-group">
+                    <label>كتلة العضلات (كجم):</label>
+                    <input type="number" id="metric-muscle" step="0.1" required>
+                </div>
+                <div class="metric-form-group">
+                    <label>كتلة العظام (كجم):</label>
+                    <input type="number" id="metric-bone" step="0.1" required>
+                </div>
+                <div class="metric-form-group">
+                    <label>معدل الحرق الأساسي (BMR):</label>
+                    <input type="number" id="metric-bmr" required>
+                </div>
+                
+                <button type="submit" class="save-metrics-btn">حفظ البيانات</button>
+                <button type="button" class="close-modal" onclick="closeBodyMetricModal()">إغلاق</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         let currentOpenPageId = null;
 
-        // Navigation Engine
+        // Unified Routing Engine
         function navigateTo(pageId) {
+            // Hide the default main home screen
             document.getElementById('main-dashboard').classList.add('hidden');
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.remove('hidden');
+            
+            // Hide any active inner components
+            const innerViews = document.querySelectorAll('.sub-page');
+            innerViews.forEach(view => view.classList.add('hidden'));
+
+            const activeView = document.getElementById(pageId);
+            if (activeView) {
+                activeView.classList.remove('hidden');
                 currentOpenPageId = pageId;
                 window.scrollTo(0, 0);
             }
@@ -363,29 +668,141 @@
                 document.getElementById(currentOpenPageId).classList.add('hidden');
                 document.getElementById('main-dashboard').classList.remove('hidden');
                 currentOpenPageId = null;
+                resetNavHighlight();
             }
         }
 
-        // Modal Box Engine
+        // Workout Modal Setup
         function openModal(dotsPattern) {
             const modal = document.getElementById('global-modal');
             const modalDotsElement = document.getElementById('modal-dots');
-            
             modalDotsElement.innerText = dotsPattern;
             modal.classList.add('active');
         }
 
         function closeModal() {
-            const modal = document.getElementById('global-modal');
-            modal.classList.remove('active');
+            document.getElementById('global-modal').classList.remove('active');
         }
 
-        // Close modal if user presses Escape key
+        // Weekly Biometric Storage System
+        function openBodyMetricModal(weekNumber) {
+            document.getElementById('metric-week-id').value = weekNumber;
+            document.getElementById('body-modal-title').innerText = `قياسات الأسبوع ${weekNumber}`;
+            
+            // Query previous history from disk context
+            const localHistory = localStorage.getItem(`week_metrics_${weekNumber}`);
+            if (localHistory) {
+                const dataset = JSON.parse(localHistory);
+                document.getElementById('metric-height').value = dataset.height || '';
+                document.getElementById('metric-weight').value = dataset.weight || '';
+                document.getElementById('metric-fat').value = dataset.fat || '';
+                document.getElementById('metric-muscle').value = dataset.muscle || '';
+                document.getElementById('metric-bone').value = dataset.bone || '';
+                document.getElementById('metric-bmr').value = dataset.bmr || '';
+            } else {
+                document.getElementById('body-metric-form').reset();
+            }
+
+            document.getElementById('body-metric-modal').classList.add('active');
+        }
+
+        function closeBodyMetricModal() {
+            document.getElementById('body-metric-modal').classList.remove('active');
+        }
+
+        function saveBodyMetrics(event) {
+            event.preventDefault();
+            const selectedWeek = document.getElementById('metric-week-id').value;
+            
+            const clientMetrics = {
+                height: document.getElementById('metric-height').value,
+                weight: document.getElementById('metric-weight').value,
+                fat: document.getElementById('metric-fat').value,
+                muscle: document.getElementById('metric-muscle').value,
+                bone: document.getElementById('metric-bone').value,
+                bmr: document.getElementById('metric-bmr').value
+            };
+
+            // Stringify and commit metrics data object to Local Storage
+            localStorage.setItem(`week_metrics_${selectedWeek}`, JSON.stringify(clientMetrics));
+            alert(`تم حفظ قياسات الأسبوع ${selectedWeek} بنجاح!`);
+            closeBodyMetricModal();
+        }
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeModal();
+                closeBodyMetricModal();
             }
         });
+
+        // ------------------------------------------------------------------ */
+        // GLOWING TABS INTERACTION LOGIC                                      */
+        // ------------------------------------------------------------------ */
+        function inverseMousePosition(element, event) {
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            return {
+                x1: -(x - rect.width / 2) / 20,
+                y1: -(y - rect.height / 2) / 20
+            };
+        }
+
+        function syncNavIndicator(targetElement) {
+            const nav = document.querySelector('.nav');
+            const targetLi = targetElement.parentNode;
+            const width = targetLi.offsetWidth;
+            const { left } = targetLi.getBoundingClientRect();
+            const offsetLeft = left - nav.getBoundingClientRect().left;
+
+            [...nav.querySelectorAll('li')].map(link => link.classList.remove('active'));
+            targetLi.classList.add('active');
+
+            nav.style.setProperty('--after-bg-position', offsetLeft);
+            nav.style.setProperty('--after-radial-bg-position', (left + width / 2) - nav.getBoundingClientRect().left);
+            nav.style.setProperty('--after-bg-width', width);
+        }
+
+        function resetNavHighlight() {
+            const defaultHomeLink = document.getElementById('home');
+            if (defaultHomeLink) syncNavIndicator(defaultHomeLink);
+        }
+
+        function handleTabRouting(event) {
+            event.preventDefault();
+            const targetId = event.target.getAttribute('id');
+            syncNavIndicator(event.target);
+            
+            if (targetId === 'home') {
+                // Clear any nested page variables and restore standard landing layout
+                const innerViews = document.querySelectorAll('.sub-page');
+                innerViews.forEach(view => view.classList.add('hidden'));
+                document.getElementById('main-dashboard').classList.remove('hidden');
+                currentOpenPageId = null;
+            } else if (targetId === 'about') {
+                navigateTo('page-about-program');
+            } else if (targetId === 'body') {
+                navigateTo('page-body-tracking');
+            }
+        }
+
+        const tabsNav = document.querySelector('.nav');
+        const links = tabsNav.querySelectorAll('li a');
+
+        for (let i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', handleTabRouting);
+            links[i].addEventListener("mousemove", (event) => {
+                const tilt = inverseMousePosition(event.target, event);
+                tabsNav.style.setProperty("--tilt-bg-y", tilt.x1 * 2);
+                tabsNav.style.setProperty("--tilt-bg-x", tilt.y1 * 2);
+            });
+        }
+
+        // Initialize default tab settings on page ready
+        ['DOMContentLoaded', 'resize'].map(event => window.addEventListener(event, () => {
+            resetNavHighlight();
+        }));
     </script>
 </body>
 </html>
