@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
     <title>Gym Workout Planner</title>
     <style>
         :root {
@@ -32,6 +32,7 @@
             color: var(--white);
             min-height: 100vh;
             overflow-x: hidden;
+            width: 100%;
         }
 
         /* Utility Classes */
@@ -49,41 +50,45 @@
 
         .rgb-text {
             animation: rgb-motion 6s linear infinite;
-            font-size: 2.5rem;
+            font-size: calc(1.6rem + 1vw);
             text-align: center;
             margin-bottom: 2rem;
+            word-wrap: break-word;
         }
 
         /* Main Dashboard Page */
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem 2rem 2rem;
+            padding: 0 1.5rem 2rem 1.5rem;
         }
 
         .main-title {
             text-align: center;
             margin-bottom: 2rem;
             color: #46a29f;
-            font-size: 3rem;
+            font-size: calc(2rem + 1.5vw);
         }
 
         .grid-dashboard {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
+            width: 100%;
         }
 
         .main-card {
             background-color: var(--card-bg);
             border: 2px solid #45f3ff;
             border-radius: 15px;
-            padding: 2.5rem 1.5rem;
+            padding: 2rem 1rem;
             text-align: center;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-size: 1.8rem;
+            font-size: calc(1.2rem + 0.5vw);
             font-weight: bold;
+            word-wrap: break-word;
         }
 
         .main-card:hover {
@@ -93,19 +98,22 @@
 
         /* Inner Sub-Pages Layout */
         .sub-page {
-            padding: 0 2rem 2rem 2rem;
-            min-height: 100vh;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 2rem 1.5rem;
+            min-height: auto;
             position: relative;
         }
 
         .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
             background-color: #ff4757;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 24px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
@@ -121,11 +129,9 @@
         /* Transparent Exercise Boxes Layout */
         .boxes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 4rem;
+            width: 100%;
         }
 
         .exercise-box {
@@ -163,20 +169,8 @@
             background: rgba(0,0,0,0.7);
             padding: 5px 15px;
             border-radius: 5px;
-            font-size: 1.1rem;
-        }
-
-        /* Rest Day Specific Style */
-        .rest-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            margin-top: 3rem;
-        }
-        .rest-box {
-            max-width: 600px;
-            width: 100%;
+            font-size: 1rem;
+            color: #fff;
         }
 
         /* Modal Overlay & Box Styling */
@@ -190,10 +184,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 100;
+            z-index: 1000;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s ease;
+            padding: 10px;
         }
 
         .modal-overlay.active {
@@ -203,13 +198,14 @@
 
         .modal-content {
             background-color: var(--card-bg);
-            padding: 2.5rem;
+            padding: 2rem 1.5rem;
             border-radius: 15px;
             border: 2px solid #45f3ff;
             text-align: center;
-            min-width: 320px;
-            max-width: 500px;
-            width: 90%;
+            width: 100%;
+            max-width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
             position: relative;
             transform: scale(0.7);
             transition: transform 0.3s ease;
@@ -220,17 +216,18 @@
         }
 
         .modal-text {
-            font-size: 2.5rem;
-            letter-spacing: 3px;
+            font-size: calc(1.5rem + 1vw);
+            letter-spacing: 2px;
             color: #45f3ff;
             margin-bottom: 1.5rem;
+            word-wrap: break-word;
         }
 
         .close-modal {
             background-color: #ff4757;
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
@@ -239,7 +236,7 @@
 
         /* Form styling inside body metric modal */
         .metric-form-group {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             text-align: right;
         }
 
@@ -248,12 +245,12 @@
             margin-bottom: 5px;
             color: #46a29f;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .metric-form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid #45f3ff;
             background-color: #0b0c10;
@@ -266,10 +263,10 @@
             background-color: #46a29f;
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 11px 24px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: bold;
             margin-top: 1rem;
             margin-left: 10px;
@@ -285,9 +282,10 @@
         .english-content {
             direction: ltr;
             text-align: left;
-            max-width: 800px;
+            width: 100%;
+            max-width: 850px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 2rem 1.5rem;
             background-color: var(--card-bg);
             border-radius: 15px;
             border: 1px solid #1f2833;
@@ -297,12 +295,12 @@
         .english-content h2 {
             color: #45f3ff;
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: calc(1.3rem + 0.4vw);
         }
 
         .english-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1.05rem;
+            line-height: 1.7;
             color: #ffffff;
             margin-bottom: 1.5rem;
         }
@@ -313,7 +311,7 @@
         }
 
         .english-content ul li {
-            font-size: 1.05rem;
+            font-size: 1rem;
             margin-bottom: 0.5rem;
             color: #c5a059;
         }
@@ -333,12 +331,14 @@
 
         .tabs-header {
             text-align: center;
-            margin-bottom: 3rem;
-            margin-top: 2rem;
+            margin-bottom: 2.5rem;
+            margin-top: 1.5rem;
+            padding: 0 10px;
+            width: 100%;
         }
 
         .nav {
-            direction: ltr; /* Keeps navigation tracking aligned with mouse logic */
+            direction: ltr;
             transition: --after-bg-position var(--trs-timing) var(--trs-easing) 0.2s, 
                         --after-radial-bg-position var(--trs-timing) var(--trs-easing) 0.2s, 
                         --after-bg-width var(--trs-timing) var(--trs-easing) 0.2s, 
@@ -347,7 +347,8 @@
             background: var(--body-bg-color);
             border-radius: 100px;
             position: relative;
-            max-width: 700px;
+            width: 100%;
+            max-width: 650px;
             margin: 0 auto;
         }
 
@@ -372,7 +373,8 @@
             list-style: none;
             display: flex;
             justify-content: space-between;
-            height: 80px;
+            align-items: center;
+            height: 70px;
             border-radius: 100px;
             background-position: center center;
             background-image: radial-gradient(ellipse 150px 100px at calc(var(--after-radial-bg-position) * 1px) bottom, white 0%, rgba(255, 255, 255, 0.2) 100%);
@@ -414,12 +416,15 @@
         }
 
         .nav ul li {
-            padding: 1em;
+            padding: 0.5em;
             height: 100%;
             width: 100%;
             position: relative;
             transform-style: preserve-3d;
             perspective: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .nav ul li:not(.active):hover {
@@ -458,11 +463,36 @@
             position: relative;
             z-index: 10;
             font-weight: bold;
+            font-size: calc(0.95rem + 0.2vw);
         }
 
         .nav ul:has(li.active:first-of-type a):after { border-radius: 100px 12px 12px 100px; }
         .nav ul:has(li.active:last-of-type a):after { border-radius: 12px 100px 100px 12px; }
         .nav ul:has(li.active:nth-child(n+2):nth-child(-n+3) a):after { border-radius: 100px; }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 480px) {
+            .nav ul {
+                height: 60px;
+            }
+            .nav ul li a {
+                font-size: 0.95rem;
+            }
+            .main-card {
+                padding: 1.5rem 1rem;
+            }
+            .metric-form-group label {
+                font-size: 0.85rem;
+            }
+            .save-metrics-btn {
+                width: 100%;
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .close-modal {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -511,7 +541,7 @@
                 <li>Active metabolic mass indexation (Muscle & Bone Mass variants).</li>
                 <li>Basal Metabolic Rate (BMR) tracking to optimize caloric windows.</li>
             </ul>
-            <p>
+            <p style="margin-bottom: 0;">
                 All biometric information captured by this system is structured and safely compiled within your browser local runtime context, ensuring permanent data tracking.
             </p>
         </div>
@@ -586,14 +616,14 @@
         <button class="back-btn" onclick="navigateBack()">رجوع</button>
         <h1 class="rgb-text">[كتف]</h1>
         <div class="boxes-grid">
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_LAT_RAISE-1.gif" alt="Shoulders"><div class="box-label">تمرين 1</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_BO_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 2</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_SHD_PRESS-1.gif" alt="Shoulders"><div class="box-label">تمرين 3</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_REAR_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 4</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/OA_CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 5</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SEAT_DB_TRI_EXT.gif" alt="Shoulders"><div class="box-label">تمرين 6</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SHD_PRESS_MAC-1.gif" alt="Shoulders"><div class="box-label">تمرين 7</div></div>
-            <div class="exercise-box"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 8</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_LAT_RAISE-1.gif" alt="Shoulders"><div class="box-label">تمرين 1</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_BO_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 2</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_SHD_PRESS-1.gif" alt="Shoulders"><div class="box-label">تمرين 3</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_REAR_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 4</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/OA_CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 5</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SEAT_DB_TRI_EXT.gif" alt="Shoulders"><div class="box-label">تمرين 6</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SHD_PRESS_MAC-1.gif" alt="Shoulders"><div class="box-label">تمرين 7</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 8</div></div>
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SIT_UP.gif" alt="Chest"><div class="box-label">تمرين 9</div></div>
         </div>
     </div>
@@ -607,7 +637,7 @@
 
     <div id="body-metric-modal" class="modal-overlay" onclick="closeBodyMetricModal()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <div id="body-modal-title" class="modal-text" style="font-size: 1.8rem;">تحديث قياسات الأسبوع</div>
+            <div id="body-modal-title" class="modal-text" style="font-size: 1.6rem;">تحديث قياسات الأسبوع</div>
             
             <form id="body-metric-form" onsubmit="saveBodyMetrics(event)">
                 <input type="hidden" id="metric-week-id">
@@ -646,12 +676,10 @@
     <script>
         let currentOpenPageId = null;
 
-        // Unified Routing Engine
+        // Routing Controller
         function navigateTo(pageId) {
-            // Hide the default main home screen
             document.getElementById('main-dashboard').classList.add('hidden');
             
-            // Hide any active inner components
             const innerViews = document.querySelectorAll('.sub-page');
             innerViews.forEach(view => view.classList.add('hidden'));
 
@@ -672,11 +700,9 @@
             }
         }
 
-        // Workout Modal Setup
         function openModal(dotsPattern) {
             const modal = document.getElementById('global-modal');
-            const modalDotsElement = document.getElementById('modal-dots');
-            modalDotsElement.innerText = dotsPattern;
+            document.getElementById('modal-dots').innerText = dotsPattern;
             modal.classList.add('active');
         }
 
@@ -684,12 +710,10 @@
             document.getElementById('global-modal').classList.remove('active');
         }
 
-        // Weekly Biometric Storage System
         function openBodyMetricModal(weekNumber) {
             document.getElementById('metric-week-id').value = weekNumber;
             document.getElementById('body-modal-title').innerText = `قياسات الأسبوع ${weekNumber}`;
             
-            // Query previous history from disk context
             const localHistory = localStorage.getItem(`week_metrics_${weekNumber}`);
             if (localHistory) {
                 const dataset = JSON.parse(localHistory);
@@ -723,7 +747,6 @@
                 bmr: document.getElementById('metric-bmr').value
             };
 
-            // Stringify and commit metrics data object to Local Storage
             localStorage.setItem(`week_metrics_${selectedWeek}`, JSON.stringify(clientMetrics));
             alert(`تم حفظ قياسات الأسبوع ${selectedWeek} بنجاح!`);
             closeBodyMetricModal();
@@ -737,7 +760,7 @@
         });
 
         // ------------------------------------------------------------------ */
-        // GLOWING TABS INTERACTION LOGIC                                      */
+        // SCALABLE GLOWING TABS ENGINE                                       */
         // ------------------------------------------------------------------ */
         function inverseMousePosition(element, event) {
             const rect = element.getBoundingClientRect();
@@ -752,21 +775,30 @@
         function syncNavIndicator(targetElement) {
             const nav = document.querySelector('.nav');
             const targetLi = targetElement.parentNode;
-            const width = targetLi.offsetWidth;
-            const { left } = targetLi.getBoundingClientRect();
-            const offsetLeft = left - nav.getBoundingClientRect().left;
+            
+            // Scalable coordinate map mapping
+            const navRect = nav.getBoundingClientRect();
+            const liRect = targetLi.getBoundingClientRect();
+            
+            const width = liRect.width;
+            const offsetLeft = liRect.left - navRect.left;
 
             [...nav.querySelectorAll('li')].map(link => link.classList.remove('active'));
             targetLi.classList.add('active');
 
             nav.style.setProperty('--after-bg-position', offsetLeft);
-            nav.style.setProperty('--after-radial-bg-position', (left + width / 2) - nav.getBoundingClientRect().left);
+            nav.style.setProperty('--after-radial-bg-position', offsetLeft + (width / 2));
             nav.style.setProperty('--after-bg-width', width);
         }
 
         function resetNavHighlight() {
-            const defaultHomeLink = document.getElementById('home');
-            if (defaultHomeLink) syncNavIndicator(defaultHomeLink);
+            let activeLink = document.getElementById('home');
+            if (currentOpenPageId === 'page-about-program') {
+                activeLink = document.getElementById('about');
+            } else if (currentOpenPageId === 'page-body-tracking') {
+                activeLink = document.getElementById('body');
+            }
+            if (activeLink) syncNavIndicator(activeLink);
         }
 
         function handleTabRouting(event) {
@@ -775,7 +807,6 @@
             syncNavIndicator(event.target);
             
             if (targetId === 'home') {
-                // Clear any nested page variables and restore standard landing layout
                 const innerViews = document.querySelectorAll('.sub-page');
                 innerViews.forEach(view => view.classList.add('hidden'));
                 document.getElementById('main-dashboard').classList.remove('hidden');
@@ -799,10 +830,9 @@
             });
         }
 
-        // Initialize default tab settings on page ready
-        ['DOMContentLoaded', 'resize'].map(event => window.addEventListener(event, () => {
-            resetNavHighlight();
-        }));
+        // Live resize handler triggers recalculations smoothly
+        window.addEventListener('resize', resetNavHighlight);
+        document.addEventListener('DOMContentLoaded', resetNavHighlight);
     </script>
 </body>
 </html>
