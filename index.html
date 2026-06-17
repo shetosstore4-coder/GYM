@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
     <title>Gym Workout Planner</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#46a29f">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GymTracker">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2964/2964514.png">
+    
     <style>
         :root {
             --bg-color: #0b0c10;
@@ -317,9 +325,7 @@
             color: #c5a059;
         }
 
-        /* ------------------------------------------------------------------ */
-        /* GLOWING TABS NAVIGATION STYLES                                     */
-        /* ------------------------------------------------------------------ */
+        /* Glowing Tabs Navigation Styles */
         @layer properties {
             @property --after-bg-position { syntax: "<number>"; inherits: true; initial-value: 0; }
             @property --after-radial-bg-position { syntax: "<number>"; inherits: true; initial-value: 0; }
@@ -515,7 +521,6 @@
             <div class="main-card" onclick="navigateTo('page-1')">الأحد</div>
             <div class="main-card" onclick="navigateTo('page-2')">الثلاثاء</div>
             <div class="main-card" onclick="navigateTo('page-3')">الخميس</div>
-            <div class="main-card" onclick="navigateTo('page-4')">السبت</div>
         </div>
     </div>
 
@@ -583,7 +588,7 @@
 
     <div id="page-2" class="sub-page hidden">
         <button class="back-btn" onclick="navigateBack()">رجوع</button>
-        <h1 class="rgb-text">[ظهر و باي]</h1>
+        <h1 class="rgb-text">[ظهر - باي]</h1>
         <div class="boxes-grid">
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/BHD_NECK_PULL_DOWN.gif" alt="Back"><div class="box-label">تمرين 1</div></div>
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/02/HPET.gif" alt="Back"><div class="box-label">تمرين 2</div></div>
@@ -599,23 +604,7 @@
 
     <div id="page-3" class="sub-page hidden">
         <button class="back-btn" onclick="navigateBack()">رجوع</button>
-        <h1 class="rgb-text">[رجل ]</h1>
-        <div class="boxes-grid">
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LEG_PRESS-1.gif" alt="Chest"><div class="box-label">تمرين 1</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SEAT_CALF_RAISE.gif" alt="Chest"><div class="box-label">تمرين 2</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/BW_CALF_RAISE.gif" alt="Chest"><div class="box-label">تمرين 3</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LEG_CURL.gif" alt="Chest"><div class="box-label">تمرين 4</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LGE_EXT-1.gif" alt="Tricep"><div class="box-label">تمرين 5</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_HIP_ABD.gif" alt="Chest"><div class="box-label">تمرين 6</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_WRIST_CURL.gif" alt="Tricep"><div class="box-label">تمرين 7</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/REV_DB_WRIST_CURL.gif" alt="Chest"><div class="box-label">تمرين 8</div></div>
-            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SIT_UP.gif" alt="Chest"><div class="box-label">تمرين 9</div></div>
-        </div>
-    </div>
-   
-    <div id="page-4" class="sub-page hidden">
-        <button class="back-btn" onclick="navigateBack()">رجوع</button>
-        <h1 class="rgb-text">[كتف]</h1>
+        <h1 class="rgb-text">[كتف - رجل ]</h1>
         <div class="boxes-grid">
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_LAT_RAISE-1.gif" alt="Shoulders"><div class="box-label">تمرين 1</div></div>
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_BO_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 2</div></div>
@@ -626,6 +615,15 @@
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SHD_PRESS_MAC-1.gif" alt="Shoulders"><div class="box-label">تمرين 7</div></div>
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_LAT_RAISE.gif" alt="Shoulders"><div class="box-label">تمرين 8</div></div>
             <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SIT_UP.gif" alt="Chest"><div class="box-label">تمرين 9</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LEG_PRESS-1.gif" alt="Chest"><div class="box-label">تمرين 10</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SEAT_CALF_RAISE.gif" alt="Chest"><div class="box-label">تمرين 11</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/BW_CALF_RAISE.gif" alt="Chest"><div class="box-label">تمرين 12</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LEG_CURL.gif" alt="Chest"><div class="box-label">تمرين 13</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/LGE_EXT-1.gif" alt="Tricep"><div class="box-label">تمرين 14</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/CABLE_HIP_ABD.gif" alt="Chest"><div class="box-label">تمرين 15</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/DB_WRIST_CURL.gif" alt="Tricep"><div class="box-label">تمرين 16</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/REV_DB_WRIST_CURL.gif" alt="Chest"><div class="box-label">تمرين 17</div></div>
+            <div class="exercise-box" onclick="openModal('12 * 4')"><img src="https://burnfit.io/en/wp-content/uploads/sites/3/2026/01/SIT_UP.gif" alt="Chest"><div class="box-label">تمرين 18</div></div>
         </div>
     </div>
 
@@ -760,9 +758,7 @@
             }
         });
 
-        // ------------------------------------------------------------------ */
-        // SCALABLE GLOWING TABS ENGINE                                       */
-        // ------------------------------------------------------------------ */
+        // SCALABLE GLOWING TABS ENGINE
         function inverseMousePosition(element, event) {
             const rect = element.getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -777,7 +773,6 @@
             const nav = document.querySelector('.nav');
             const targetLi = targetElement.parentNode;
             
-            // Scalable coordinate map mapping
             const navRect = nav.getBoundingClientRect();
             const liRect = targetLi.getBoundingClientRect();
             
@@ -831,9 +826,17 @@
             });
         }
 
-        // Live resize handler triggers recalculations smoothly
         window.addEventListener('resize', resetNavHighlight);
         document.addEventListener('DOMContentLoaded', resetNavHighlight);
+
+        // SERVICE WORKER REGISTRATION (PWA ACTIVATION)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered successfully!', reg))
+                    .catch(err => console.log('Service Worker registration failed: ', err));
+            });
+        }
     </script>
 </body>
 </html>
